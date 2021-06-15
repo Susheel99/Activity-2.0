@@ -6,7 +6,7 @@ class Project(models.Model):
     concept = models.TextField(max_length=500)
     start_date = models.DateField(auto_now_add=True)
     end_date = models.DateField()
-    image = models.ImageField(upload_to='photos/project',blank=True)
+    image = models.ImageField(upload_to='photos/project',default='photos/project/ben-4wxWBy8Jo1I-unsplash.jpg')
 
     def __str__(self):
         return self.project_name
