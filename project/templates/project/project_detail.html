@@ -7,9 +7,11 @@
 -->
 <html>
 	<head>
-		<title>Generic - Hyperspace by HTML5 UP</title>
+		<title>Project - Detail</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 		<link rel="stylesheet" href="{% static 'project/assets/css/main.css' %}" />
 		<noscript><link rel="stylesheet" href="{% static 'project/assets/css/noscript.css' %}" /></noscript>
 	</head>
@@ -17,7 +19,7 @@
 
 		<!-- Header -->
 			<header id="header">
-				<a href="{% url 'home' %}" class="title">Hyperspace</a>
+				<a href="{% url 'home' %}" class="title">Projects</a>
 				<nav>
 					<ul>
 						<li><a href="{% url 'home' %}">Home</a></li>
@@ -33,15 +35,31 @@
 				<!-- Main -->
 					<section id="main" class="wrapper">
 						<div class="inner">
-							<h1 class="major">A Generic Page</h1>
+							<h1 class="major">{{project.project_name}}</h1>
 							<span class="image fit"><img src="images/pic04.jpg" alt="" /></span>
-							<p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fergiat. Pellentesque in mi eu massa lacinia malesuada et a elit. Donec urna ex, lacinia in purus ac, pretium pulvinar mauris. Curabitur sapien risus, commodo eget turpis at, elementum convallis elit. Pellentesque enim turpis, hendrerit tristique.</p>
-							<p>Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fersapien risus, commodo eget turpis at, elementum convallis elit. Pellentesque enim turpis, hendrerit tristique lorem ipsum dolor.</p>
+							<p>{{project.concept}}</p>
+							<!-- <p>Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fersapien risus, commodo eget turpis at, elementum convallis elit. Pellentesque enim turpis, hendrerit tristique lorem ipsum dolor.</p> -->
 						    {% for idea in ideas %}
 						    	<ul>
 							  		<li>{{idea.idea_desc}}</li>	
 						    	</ul>
 							{% endfor %}
+							<form action="" method="POST">
+								{% csrf_token %}
+								<div class="row">
+									<div class="col-md-8">
+										{{form.idea_desc}}
+									</div>
+									<div class="col-md-3">
+										<input type="submit">
+									</div>
+									<div class="col-md-1">
+										<button type="button"><a href="{% url 'project_delete' project.id %}">Delete Project</a></button>
+									</div>
+								</div>
+								
+								
+							</form>
 						</div>
 						
 					</section>
