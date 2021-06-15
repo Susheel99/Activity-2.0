@@ -6,10 +6,16 @@ class Project(models.Model):
     concept = models.TextField(max_length=500)
     start_date = models.DateField(auto_now_add=True)
     end_date = models.DateField()
-    image = models.ImageField(upload_to='photos/project',default='photos/project/ben-4wxWBy8Jo1I-unsplash.jpg')
+    image = models.ImageField(upload_to='photos/project',null=True, blank=True)
 
     def __str__(self):
         return self.project_name
+
+    # def get_photo_url(self):
+    #     if self.photo and hasattr(self.photo, 'url'):
+    #         return self.photo.url
+    #     else:
+    #         return "/static/images/user.jpg"
 
 class Idea(models.Model):
     idea_desc = models.CharField(max_length=500)

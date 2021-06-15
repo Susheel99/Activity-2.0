@@ -49,7 +49,11 @@
 					<section id="one" class="wrapper style2 spotlights">
 						{% for project in projects %}
 						<section>
-							<a href="#" class="image"><img src="" alt="" data-position="center center" /></a>
+							{% if project.image %}
+							<a href="#" class="image"><img src="{{ project.image.url }}" alt="" data-position="center center" /></a>
+							{% else %}
+							<a href="#" class="image"><img src="{{ project.image.url }}" alt="" data-position="center center" /></a>
+							{% endif %}
 							<div class="content">
 								<div class="inner">
 									<h2>{{project.project_name}}</h2>

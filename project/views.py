@@ -30,11 +30,12 @@ def project_detail(request,id):
     return render(request,'project/project_detail.html',{'ideas':ideas,'form':form,'project':project_dt})
 
 def add_project(request):
-    form = ProjectForm(request.POST or None)
+    form = ProjectForm(request.POST or None,request.FILES or None)
 
 
     if form.is_valid():
         form.save()
+        return redirect('home')
         # project_name = form.cleaned_data['project_name']
         # end_date = form.cleaned_data['end_date']
         # image = form.cleaned_data['image']
