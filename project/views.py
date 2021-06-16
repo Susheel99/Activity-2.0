@@ -4,6 +4,8 @@ from django.shortcuts import get_object_or_404
 from .forms import  ProjectForm,IdeaForm
 from django.urls import reverse
 from django.http import HttpResponseRedirect
+import PIL
+from PIL import Image
 # Create your views here.
 
 def home(request):
@@ -25,8 +27,8 @@ def project_detail(request,id):
         #return render(request,'project/project_detail.html',{'ideas':ideas,'form':form,'project':project_dt})
         # return redirect('project_detail',args=(id,))
 
-    
-    
+
+
     return render(request,'project/project_detail.html',{'ideas':ideas,'form':form,'project':project_dt})
 
 def add_project(request):
