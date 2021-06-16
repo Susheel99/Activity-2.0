@@ -28,24 +28,24 @@
 									is Ethereal</h1>
 									<p>This is <strong>Ethereal</strong>, a free site template by AJ for <a href="https://html5up.net">HTML5 UP</a>. It’s fully responsive, built on HTML5 and CSS3, and released entirely for free under the Creative Commons license. Hope you dig it :)</p>
 									<ul class="actions">
-										<li><a href="#first" class="button primary color1 circle icon solid fa-angle-right">Next</a></li>
+										<li><a href="{% url 'add_task' %}" target="_blank" class="button primary color1 circle icon solid fa-angle-right">Next</a></li>
 									</ul>
 								</div>
-								<div class="image filtered span-1-75" data-position="25% 25%">
+								<!-- <div class="image filtered span-1-75" data-position="25% 25%">
 									<img src="images/pic01.jpg" alt="" />
-								</div>
+								</div> -->
 							</section>
 
 						<!-- Panel -->
 							<section class="panel color4-alt">
 								{% for task in tasks %}
 									<div class="intro color4">
-										<h2 class="major"> <a href="{% url 'task_detail' task.id %}" style="text-decoration: none;">{{task.task_name}}</a> </h2>
+										<h2 > <a href="{% url 'task_detail' task.id %}" style="text-decoration: none;">{{task.task_name}}</a> </h2>
 										<p>{{task.task_desc}}</p>
 									</div>
 									<div class="intro color2">
-										<h2 class="major"></h2>
-										<p></p>
+										
+										
 									</div>
 								{% endfor %}
 							</section>

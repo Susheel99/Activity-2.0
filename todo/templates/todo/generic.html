@@ -24,21 +24,14 @@
 		<noscript><link rel="stylesheet" href="{% static 'todo/assets/css/noscript.css' %}" /></noscript>
 	</head>
 	<body class="is-preload">
-		<section class="panel spotlight large left">
+		<section class="panel color1">
 			<div class="inner columns aligned"  > 
 				<!-- class="content span-5" -->
-				<h2 class="major">{{task.task_name}}</h2>
-				<div >
-					<!-- <h4>Alternate</h4> -->
+				
+				<div class="span-4-5">
+					<h2 class="major">{{task.task_name}}</h2>
 					<div class="table-wrapper">
 						<table class="alt">
-							<!-- <thead>
-								<tr>
-									<th>Name</th>
-									<th>Description</th>
-									<th>Price</th>
-								</tr>
-							</thead> -->
 							<tbody>
 								{% for sub_task in sub_tasks %}
 									{% if sub_task.is_active == True %}
@@ -60,19 +53,40 @@
 							</tfoot>
 						</table>
 					</div>
+					
+				</div>
+				<div class="span-2" >
+						<h3>Form</h3>
 					<form method="POST" action="{% url 'add' task.id%}">
 						{% csrf_token %}
-						{{form}}
-						<button type="submit">Add <i class="fas fa-plus-circle"></i></button>
-						
+						<div class="row">
+							<div class="col-md-10">
+								<label for="demo-email"><h4>SubTask</h4></label>
+								{{form.sub_name}}
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-md-6">
+								<label for="demo-email"><h4>Start Time</h4></label>
+								{{form.start_time}}
+							</div>
+							<div class="col-md-6">
+								<label for="demo-email"><h4>End Time</h4></label>
+								{{form.end_time}}
+							</div>	
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-md-4">
+								<button type="submit">Add <i class="fas fa-plus-circle"></i></button>
+							</div>
+						</div>						
 					</form>
-				</div>
-				
-				
+					</div>
 			</div>
-			<div class="image filtered tinted" data-position="top right">
-				<img src="images/pic03.jpg" alt="" />
-			</div>
+
+			
 		</section>
 
 		<!-- Scripts -->
