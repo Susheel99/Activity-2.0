@@ -15,11 +15,48 @@
     <title>Add Task</title>
 </head>
 <body class="is-preload">
-    Start day is today
+    <!-- Start day is today
     <form action="" method="POST">
         {% csrf_token %}
         {{form}}
-    </form>
+    </form> -->
+    <section class="panel color2-alt">
+        <div class="intro color4">
+            <!-- <h2 >Elements</h2>
+            <p>Sed vel nibh libero. Mauris et lorem pharetra massa lorem turpis congue pulvinar. Vivamus sed feugiat finibus. Duis amet bibendum amet sed. Duis mauris ex, dapibus sed ligula tempus volutpat magna etiam. </p> -->
+        </div>
+        <div class="inner columns aligned">
+            <div class="span-4-5">
+                <h3 class="major">Form</h3>
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-8">
+                            <label for="demo-email"><h4>Task Name</h4></label>
+                            {{form.task_name}}
+                        </div>
+                        <div class="col-md-4">
+                            <label for="demo-email"><h4>End Date</h4></label>
+                            {{form.end_date}}
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label for="demo-email"><h4>Description</h4></label>
+                            {{form.task_desc}}
+                        </div>
+                        
+                    </div> 
+                </form> 
+            </div>
+        </div>
+        <div class="intro color4">
+            <!-- <h2 class="major">Elements</h2>
+            <p>Sed vel nibh libero. Mauris et lorem pharetra massa lorem turpis congue pulvinar. Vivamus sed feugiat finibus. Duis amet bibendum amet sed. Duis mauris ex, dapibus sed ligula tempus volutpat magna etiam. </p> -->
+        </div>
+    </section>
+    
 
     <script src="{% static 'todo/assets/js/jquery.min.js' %}"></script>
 	<script src="{% static 'todo/assets/js/browser.min.js' %}"></script>
