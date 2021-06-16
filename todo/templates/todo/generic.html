@@ -25,7 +25,8 @@
 	</head>
 	<body class="is-preload">
 		<section class="panel spotlight large left">
-			<div class="content span-5">
+			<div class="inner columns aligned"  > 
+				<!-- class="content span-5" -->
 				<h2 class="major">{{task.task_name}}</h2>
 				<div >
 					<!-- <h4>Alternate</h4> -->
@@ -53,16 +54,20 @@
 							</tbody>
 							<tfoot>
 								<tr>
-									<div id="other">
-										Trigger the handler
-									  </div>
 									<td colspan="2"></td>
-									<td>100.00</td>
+									<td></td>
 								</tr>
 							</tfoot>
 						</table>
 					</div>
+					<form method="POST" action="{% url 'add' task.id%}">
+						{% csrf_token %}
+						{{form}}
+						<button type="submit">Add <i class="fas fa-plus-circle"></i></button>
+						
+					</form>
 				</div>
+				
 				
 			</div>
 			<div class="image filtered tinted" data-position="top right">
