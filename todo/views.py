@@ -1,8 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from .models import Task,SubTask
 from django.urls import reverse
 from django.http import HttpResponseRedirect
-from .forms import SubTaskForm
+from .forms import SubTaskForm,TaskForm
 
 # Create your views here.
 
@@ -39,5 +39,16 @@ def add(request,id):
     return HttpResponseRedirect(reverse('task_detail', args=(task.id,)))
     
     
+def add_task(request):
+    form = TaskForm(request.POST or None)
+
+    if form.is_valid():
+        form.save()
+        return redirect('index')
+        # task_name = form.cleaned_data['task_name']
+        # task_desc = form.cleaned_data['task_desc']
+        # start_date = form.cleaned_data['start_date']
+        # end_date = form.cleaned_data['end_date']
+    return render(request,'todo/add_task.html',{'form':form})
 
     
