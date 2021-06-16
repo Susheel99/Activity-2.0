@@ -15,6 +15,7 @@ class SubTask(models.Model):
     start_time = models.TimeField()
     end_time = models.TimeField()
     task = models.ForeignKey(Task,on_delete=models.CASCADE)
+    is_active = models.BooleanField(default=True)
 
     def __str__(self):
         return self.sub_name

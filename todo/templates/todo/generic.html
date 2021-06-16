@@ -10,20 +10,60 @@
 		<title>Generic - Phantom by HTML5 UP</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		
+		<!-- jquery -->
+		<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'>
+		</script>
+
+		<!-- font awesome -->
+		<script src="https://kit.fontawesome.com/6b54c20d54.js" crossorigin="anonymous"></script>
+
+		<!-- css -->
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 		<link rel="stylesheet" href="{% static 'todo/assets/css/main.css' %}" />
 		<noscript><link rel="stylesheet" href="{% static 'todo/assets/css/noscript.css' %}" /></noscript>
 	</head>
 	<body class="is-preload">
 		<section class="panel spotlight large left">
 			<div class="content span-5">
-				<h2 class="major">Magna amet tempus</h2>
-				<ul>
-					<li>hello</li>
-					<li>Dude</li>
-					<li>Goodbye</li>
-					<li>more</li>
-				</ul>
-				<p>Mauris a cursus velit.  turpis congue pulvinar.</p>
+				<h2 class="major">{{task.task_name}}</h2>
+				<div >
+					<!-- <h4>Alternate</h4> -->
+					<div class="table-wrapper">
+						<table class="alt">
+							<!-- <thead>
+								<tr>
+									<th>Name</th>
+									<th>Description</th>
+									<th>Price</th>
+								</tr>
+							</thead> -->
+							<tbody>
+								{% for sub_task in sub_tasks %}
+									{% if sub_task.is_active == True %}
+										<tr>
+											<td>{{sub_task.sub_name}}</td>
+											<td>{{sub_task.start_time}} | {{sub_task.end_time}}</td>
+											<td>
+											<a href="{% url 'hide'  sub_task.id %}"><i class="fas fa-check-circle"></i></a>
+								    		</td>
+										</tr>
+									{% endif %}
+								{% endfor %}
+							</tbody>
+							<tfoot>
+								<tr>
+									<div id="other">
+										Trigger the handler
+									  </div>
+									<td colspan="2"></td>
+									<td>100.00</td>
+								</tr>
+							</tfoot>
+						</table>
+					</div>
+				</div>
+				
 			</div>
 			<div class="image filtered tinted" data-position="top right">
 				<img src="images/pic03.jpg" alt="" />
@@ -36,6 +76,8 @@
 			<script src="{% static 'todo/assets/js/breakpoints.min.js' %}"></script>
 			<script src="{% static 'todo/assets/js/util.js' %}"></script>
 			<script src="{% static 'todo/assets/js/main.js' %}"></script>
+
+			
 
 	</body>
 </html>
