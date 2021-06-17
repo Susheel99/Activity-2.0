@@ -54,7 +54,13 @@
 							</tfoot>
 						</table>
 					</div>
-					
+					<div class="row">
+						<div class="col-md-12">
+							<ul class="actions">
+								<li><a href="{% url 'delete_task' task.id %}" class="button primary color2"><i class="fas fa-trash-alt"></i> Delete Task</a></li>
+							</ul>
+						</div>
+					</div>
 				</div>
 				<div class="span-2" >
 						<h3>Form</h3>
@@ -86,6 +92,7 @@
 					</form>
 					</div>
 			</div>
+			
 
 			
 		</section>

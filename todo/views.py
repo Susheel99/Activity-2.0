@@ -51,4 +51,10 @@ def add_task(request):
         # end_date = form.cleaned_data['end_date']
     return render(request,'todo/add_task.html',{'form':form})
 
+def delete_task(request,id):
+    task = Task.objects.get(id=id)
+    task.delete()
+
+    return redirect('index')
+
     
