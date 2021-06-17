@@ -57,4 +57,8 @@ def delete_task(request,id):
 
     return redirect('index')
 
+def all_tasks(request):
+    subtasks = SubTask.objects.order_by('start_time')
+    return render(request,'todo/all_tasks.html',{'subtasks':subtasks})
+
     
