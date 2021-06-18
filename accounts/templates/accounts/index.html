@@ -25,6 +25,12 @@
                     <img class="booking-img" src="{% static 'accounts/images/form-img.jpg' %}" alt="Booking Image">
                 </div>
                 <div class="booking-form">
+                    {% if error %}
+                        {{ error }}
+                        <br/>
+                        <br/>
+                    {% endif %}
+
                     <form id="booking-form" method="POST">
                         {% csrf_token %}
                         <h2>Sign Up!</h2>
