@@ -40,7 +40,8 @@
 								{% for task in tasks %}
 								
 									<div class="intro color4">
-										<h2 > <a href="{% url 'task_detail' task.id %}" style="text-decoration: none;">{{task.task_name}} </a> </h2>
+										<h2 > <a href="{% url 'task_detail' task.id %}" style="text-decoration: none;">{{task.task_name}} <span class="badge rounded-pill bg-light text-dark">{{task.get_subtasks}}</span>
+										</a> </h2>
 										<p>{{task.task_desc}}</p>
 									</div>
 									<div class="intro color2">

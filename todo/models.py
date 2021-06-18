@@ -9,6 +9,10 @@ class Task(models.Model):
     
     def __str__(self):
         return self.task_name
+    
+    def get_subtasks(self):
+        subtasks = SubTask.objects.filter(task=self,is_active=True)
+        return len(subtasks)
 
 class SubTask(models.Model):
     sub_name = models.CharField(max_length=500)
