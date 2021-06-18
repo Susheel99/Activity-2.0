@@ -7,9 +7,15 @@ from .forms import SubTaskForm,TaskForm
 # Create your views here.
 
 def index(request):
-    tasks = Task.objects.all()
+    tasks = Task.objects.order_by('-end_date')
+    i=0
+    subtasks_cnt=[]
+    for task in tasks:
+        subtasks = SubTask.objects.filter(task=task,is_active=True)
+        subtasks_cnt.append(len(subtasks))
     cnt = tasks.count()
-    return render(request,'todo/index.html',{'tasks':tasks,'cnt':cnt})
+    # sub_tasks = SubTask.objects.filter(task=task)
+    return render(request,'todo/index.html',{'tasks':tasks,'cnt':cnt,'subtasks_cnt':subtasks_cnt,'i':i})
 
 def task_detail(request,id):
     form = SubTaskForm(request.POST or None)
