@@ -20,3 +20,9 @@ def signup(request):
 
     else:
         return render(request, 'accounts/index.html')
+
+def login(request):
+    pass
+
+def logout(request):
+    pass
