@@ -20,12 +20,13 @@
 </head>
 <body class="is-preload">
     <section class="panel color2-alt">
-        <div class="intro color4">
+        <!-- <div class="intro color4"> -->
             <!-- <h2 class="major">Elements</h2>
             <p>Sed vel nibh libero. Mauris et lorem pharetra massa lorem turpis congue pulvinar. Vivamus sed feugiat finibus. Duis amet bibendum amet sed. Duis mauris ex, dapibus sed ligula tempus volutpat magna etiam. </p> -->
-        </div>
+        <!-- </div> -->
         <div class="panel span-4-5">
             <div class="table-wrapper">
+                <h2 class="major">Today</h2>
                 <table class="alt">
                     <thead>
                         <tr>
@@ -36,11 +37,13 @@
                     </thead>
                     <tbody>
                         {% for subtask in subtasks %}
+                        {% if subtask.is_active %}
                         <tr>
                             <td>{{subtask.sub_name}}</td>
                             <td>{{subtask.task}}</td>
                             <td>{{subtask.start_time}}</td>
                         </tr> 
+                        {% endif %}
                         {% endfor %}  
                     </tbody>
                     <!-- <tfoot>
@@ -55,7 +58,39 @@
         <div class="intro color4">
             <!-- <h2 class="major">Elements</h2>
             <p>Sed vel nibh libero. Mauris et lorem pharetra massa lorem turpis congue pulvinar. Vivamus sed feugiat finibus. Duis amet bibendum amet sed. Duis mauris ex, dapibus sed ligula tempus volutpat magna etiam. </p> -->
-        </div>   
+        </div> 
+        <div class="panel span-4-5">
+
+            <div class="table-wrapper">
+                <h2 class="major">Completed Till Now</h2>
+                <table class="alt">
+                    <thead>
+                        <tr>
+                            <th><h4>Sub Task</h4></th>
+                            <th><h4>Task</h4></th>
+                            <th><h4>Start Time</h4></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for subtask in subtasks %}
+                        {% if subtask.is_active is False  %}
+                        <tr>
+                            <td>{{subtask.sub_name}}</td>
+                            <td>{{subtask.task}}</td>
+                            <td>{{subtask.start_time}}</td>
+                        </tr> 
+                        {% endif %}
+                        {% endfor %}  
+                    </tbody>
+                    <!-- <tfoot>
+                        <tr>
+                            <td colspan="2"></td>
+                            <td>100.00</td>
+                        </tr>
+                    </tfoot> -->
+                </table>
+            </div>
+        </div> 
     </section>
 
 
