@@ -19,9 +19,10 @@ def index(request):
 
 def task_detail(request,id):
     form = SubTaskForm(request.POST or None)
+    tasks = Task.objects.all()
     task = Task.objects.get(id=id)
     sub_tasks = SubTask.objects.filter(task=task)
-    return render(request,'todo/generic.html',{'task':task,'sub_tasks':sub_tasks,'form':form})
+    return render(request,'todo/generic.html',{'task':task,'sub_tasks':sub_tasks,'form':form,'tasks':tasks})
 
 def hide(request,id):
     subtask = SubTask.objects.get(id=id)

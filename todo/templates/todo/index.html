@@ -16,6 +16,21 @@
 		<noscript><link rel="stylesheet" href="{% static 'todo/assets/css/noscript.css' %}" /></noscript>
 	</head>
 	<body class="is-preload">
+		<!-- Header -->
+		<header id="header">
+			<!-- <a href="{% url 'home' %}" class="title">Projects</a> -->
+			<nav>
+				<ul>
+					<li><a href="{% url 'home' %}">Projects</a></li>
+					<li><a href="{% url 'index' %}" class="active">Tasks</a></li>
+					<li><a href="{% url 'all_tasks' %}">SubTasks</a></li>
+					<li><a href="{% url 'add_task' %}">Add Task</a></li>
+					
+					
+				</ul>
+			</nav>
+		</header>
+
 		<!-- <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div> -->
 				<!-- Wrapper -->
 					<div id="wrapper">
