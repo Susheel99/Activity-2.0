@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 # Create your models here.
 class Task(models.Model):
@@ -16,6 +17,7 @@ class Task(models.Model):
 
 class SubTask(models.Model):
     sub_name = models.CharField(max_length=500)
+    start_date = models.DateField(default=timezone.now, blank=True,null=True)
     start_time = models.TimeField()
     end_time = models.TimeField()
     task = models.ForeignKey(Task,on_delete=models.CASCADE)

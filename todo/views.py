@@ -3,6 +3,7 @@ from .models import Task,SubTask
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 from .forms import SubTaskForm,TaskForm
+import datetime
 
 # Create your views here.
 
@@ -45,9 +46,10 @@ def add(request,id):
     if form.is_valid():
         subtask_name = form.cleaned_data['sub_name']
         start_time = form.cleaned_data['start_time']
+        start_date = form.cleaned_data['start_date']
         end_time = form.cleaned_data['end_time']
         
-        subtask = SubTask.objects.create(sub_name=subtask_name, start_time=start_time, end_time=end_time,task=task,is_active=True)
+        subtask = SubTask.objects.create(sub_name=subtask_name,start_date=start_date, start_time=start_time, end_time=end_time,task=task,is_active=True)
         subtask.save()
     
     return HttpResponseRedirect(reverse('task_detail', args=(task.id,)))
@@ -72,7 +74,27 @@ def delete_task(request,id):
     return redirect('index')
 
 def all_tasks(request):
-    subtasks = SubTask.objects.order_by('start_time')
+    today=datetime.date.today()  # Returns 2018-01-15
+    # print(c)
+    subtasks = SubTask.objects.filter(start_date=today).order_by('start_time')
+    
+    
     return render(request,'todo/all_tasks.html',{'subtasks':subtasks})
 
     
+def pending_tasks(request):
+    today=datetime.date.today()
+    subtasks = SubTask.objects.filter(start_date__lt=today,is_active=True)
+    return render(request,'todo/pending_tasks.html',{'subtasks':subtasks})
+
+def subtasks_by_date(request):
+    # form = SubTaskForm(request.POST or None)
+    subtasks = None
+    if request.method == 'POST':
+        # if form.is_valid():
+        date = request.POST.get('date')
+        subtasks = SubTask.objects.filter(start_date=date)
+        # else :
+        #     print("invalid form")
+        return render(request,'todo/get_subtasksbydate.html',{'subtasks':subtasks,'day':date})
+    return render(request,'todo/get_subtasksbydate.html',{'subtasks':subtasks})

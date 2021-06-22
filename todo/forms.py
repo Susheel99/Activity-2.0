@@ -16,4 +16,4 @@ class TaskForm(forms.ModelForm):
 class SubTaskForm(forms.ModelForm):
     class Meta:
         model = SubTask
-        fields = ['sub_name', 'start_time','end_time']
+        fields = ['sub_name', 'start_date','start_time','end_time']
