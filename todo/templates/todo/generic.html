@@ -67,6 +67,7 @@
 											<td>
 											<a href="{% url 'hide'  sub_task.id %}"><i class="fas fa-check-circle"></i></a>
 								    		</td>
+											<td><a href="{% url 'delete_subtask' sub_task.id %}"><i class="fas fa-times-circle"></i></a></td>
 										</tr>
 									{% endif %}
 								{% endfor %}
@@ -114,6 +115,13 @@
 								<label for="demo-email"><h4>End Time</h4></label>
 								{{form.end_time}}
 							</div>	
+						</div>
+						<br>
+						<div class="row">
+							<div class="col-md-12">
+								<label for="demo-email"><h4>Start Date</h4></label>
+								{{form.start_date}}
+							</div>
 						</div>
 						<br>
 						<div class="row">
