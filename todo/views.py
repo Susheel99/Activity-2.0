@@ -31,6 +31,13 @@ def hide(request,id):
     
     return HttpResponseRedirect(reverse('task_detail', args=(subtask.task.id,)))
 
+def delete_subtask(self,id):
+    subtask = SubTask.objects.get(id=id)
+    subtask.delete()
+
+    return HttpResponseRedirect(reverse('task_detail', args=(subtask.task.id,)))
+    
+
 def add(request,id):
     task = Task.objects.get(id=id)
     form = SubTaskForm(request.POST or None)

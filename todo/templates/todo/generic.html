@@ -67,6 +67,7 @@
 											<td>
 											<a href="{% url 'hide'  sub_task.id %}"><i class="fas fa-check-circle"></i></a>
 								    		</td>
+											<td><a href="{% url 'delete_subtask' sub_task.id %}"><i class="fas fa-times-circle"></i></a></td>
 										</tr>
 									{% endif %}
 								{% endfor %}
