@@ -93,7 +93,7 @@ def subtasks_by_date(request):
     if request.method == 'POST':
         # if form.is_valid():
         date = request.POST.get('date')
-        subtasks = SubTask.objects.filter(start_date=date)
+        subtasks = SubTask.objects.filter(start_date=date).order_by('start_time')
         # else :
         #     print("invalid form")
         return render(request,'todo/get_subtasksbydate.html',{'subtasks':subtasks,'day':date})
