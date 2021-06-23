@@ -9,7 +9,7 @@ from PIL import Image
 # Create your views here.
 
 def home(request):
-    projects = Project.objects.all()
+    projects = Project.objects.filter(user=request.user)
     return render(request,'project/index.html',{'projects':projects})
 
 def project_detail(request,id):
