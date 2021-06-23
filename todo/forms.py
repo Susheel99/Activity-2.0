@@ -11,6 +11,7 @@ class TaskForm(forms.ModelForm):
         super(TaskForm, self).__init__(*args, **kwargs)
 
         self.fields['task_name'].widget.attrs['class'] = 'form-control'
+        # self.fields['user'].widget.attrs['placeholder'] = 'test'
 
 
 class SubTaskForm(forms.ModelForm):

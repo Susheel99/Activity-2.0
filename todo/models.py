@@ -1,8 +1,10 @@
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Task(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE,null=True)
     task_name = models.CharField(max_length=100)
     task_desc = models.TextField(max_length=500)
     start_date = models.DateField(auto_now_add=True)
@@ -14,6 +16,14 @@ class Task(models.Model):
     def get_subtasks(self):
         subtasks = SubTask.objects.filter(task=self,is_active=True)
         return len(subtasks)
+
+    # def save(self,**kwargs):
+    #   if 'request' in kwargs :#and self.user is None:
+    #         request = kwargs.pop('request')
+    #         self.user= request.user
+    #   else:
+    #       print('not working')
+    #   super(Task, self).save(**kwargs)
 
 class SubTask(models.Model):
     sub_name = models.CharField(max_length=500)
