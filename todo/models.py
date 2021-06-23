@@ -17,13 +17,7 @@ class Task(models.Model):
         subtasks = SubTask.objects.filter(task=self,is_active=True)
         return len(subtasks)
 
-    # def save(self,**kwargs):
-    #   if 'request' in kwargs :#and self.user is None:
-    #         request = kwargs.pop('request')
-    #         self.user= request.user
-    #   else:
-    #       print('not working')
-    #   super(Task, self).save(**kwargs)
+
 
 class SubTask(models.Model):
     sub_name = models.CharField(max_length=500)

@@ -36,12 +36,13 @@ def add_project(request):
 
 
     if form.is_valid():
-        form.save()
+        project_name = form.cleaned_data['project_name']
+        end_date = form.cleaned_data['end_date']
+        image = form.cleaned_data['image']
+        concept = form.cleaned_data['concept']
+        project = Project.objects.create(user=request.user,project_name=project_name,image=image,concept=concept,end_date=end_date)
+        project.save()
         return redirect('home')
-        # project_name = form.cleaned_data['project_name']
-        # end_date = form.cleaned_data['end_date']
-        # image = form.cleaned_data['image']
-        # concept = form.cleaned_data['concept']
 
     return render(request,'project/add_project.html',{'form':form})
 
