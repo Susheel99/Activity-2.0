@@ -20,6 +20,7 @@ class Task(models.Model):
 
 
 class SubTask(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE,null=True)
     sub_name = models.CharField(max_length=500)
     start_date = models.DateField(default=timezone.now, blank=True,null=True)
     start_time = models.TimeField()

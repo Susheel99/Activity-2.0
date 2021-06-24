@@ -43,7 +43,7 @@ def add(request,id):
         start_date = form.cleaned_data['start_date']
         end_time = form.cleaned_data['end_time']
         
-        subtask = SubTask.objects.create(sub_name=subtask_name,start_date=start_date, start_time=start_time, end_time=end_time,task=task,is_active=True)
+        subtask = SubTask.objects.create(user=request.user,sub_name=subtask_name,start_date=start_date, start_time=start_time, end_time=end_time,task=task,is_active=True)
         subtask.save()
     
     return HttpResponseRedirect(reverse('task_detail', args=(task.id,)))
@@ -72,39 +72,23 @@ def delete_task(request,id):
 def all_tasks(request):
     today=datetime.date.today()  # Returns 2018-01-15
     # print(c)
-    tasks = Task.objects.filter(user=request.user)
-    queryset = SubTask.objects.none()
+    subtasks = SubTask.objects.filter(user=request.user,start_date=today).order_by('start_time')
     
-    for task in tasks:
-        subtasks = SubTask.objects.filter(task=task,start_date=today).order_by('start_time')
-        queryset = list(chain(queryset, subtasks))
     
-    return render(request,'todo/all_tasks.html',{'subtasks':queryset})
+    return render(request,'todo/all_tasks.html',{'subtasks':subtasks})
 
     
 def pending_tasks(request):
     today=datetime.date.today()
-    tasks = Task.objects.filter(user=request.user)
-    queryset = SubTask.objects.none()
-    
-    for task in tasks:
-        subtasks = SubTask.objects.filter(task=task,start_date__lt=today,is_active=True).order_by('start_time')
-        queryset = list(chain(queryset, subtasks))
-    # subtasks = SubTask.objects.filter(start_date__lt=today,is_active=True)
-    return render(request,'todo/pending_tasks.html',{'subtasks':queryset})
+    subtasks = SubTask.objects.filter(user=request.user,start_date__lt=today,is_active=True).order_by('start_time')
+    return render(request,'todo/pending_tasks.html',{'subtasks':subtasks})
 
 def subtasks_by_date(request):
     
     subtasks = None
-    tasks = Task.objects.filter(user=request.user)
-    queryset = SubTask.objects.none()
     if request.method == 'POST':
-        
         date = request.POST.get('date')
-        for task in tasks:
-            subtasks = SubTask.objects.filter(task=task,start_date=date).order_by('start_time')
-            queryset = list(chain(queryset, subtasks))
-            # subtasks = SubTask.objects.filter(start_date=date).order_by('start_time')
-     
-        return render(request,'todo/get_subtasksbydate.html',{'subtasks':queryset,'day':date})
-    return render(request,'todo/get_subtasksbydate.html',{'subtasks':queryset})
+        subtasks = SubTask.objects.filter(user=request.user,start_date=date).order_by('start_time')
+        
+        return render(request,'todo/get_subtasksbydate.html',{'subtasks':subtasks,'day':date})
+    return render(request,'todo/get_subtasksbydate.html',{'subtasks':subtasks})
