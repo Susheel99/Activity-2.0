@@ -101,7 +101,7 @@ def subtasks_by_task(request):
         id = request.POST.get('id')
         print(id)
         task = Task.objects.get(id=id)
-        subtasks = SubTask.objects.filter(user=request.user,task=task).order_by('start_time')
+        subtasks = SubTask.objects.filter(user=request.user,task=task).order_by('-start_date','start_time')
      
         return render(request,'todo/subtasks_by_task.html',{'subtasks':subtasks,'tasks':tasks})
     return render(request,'todo/subtasks_by_task.html',{'subtasks':subtasks,'tasks':tasks})
