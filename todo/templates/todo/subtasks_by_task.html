@@ -20,13 +20,23 @@
 </head>
 <body class="is-preload">
     <section class="panel color2-alt">
-        <!-- <div class="intro color4"> -->
-            <!-- <h2 class="major">Elements</h2>
-            <p>Sed vel nibh libero. Mauris et lorem pharetra massa lorem turpis congue pulvinar. Vivamus sed feugiat finibus. Duis amet bibendum amet sed. Duis mauris ex, dapibus sed ligula tempus volutpat magna etiam. </p> -->
-        <!-- </div> -->
+        <br>
+        <form action="{% url 'subtasks_by_task' %}" method="POST">
+            {% csrf_token %}
+            <div class="field third">
+                <label for="demo-name">Select a Task</label>
+                <select name="id" id="">
+                        {% for task in tasks %}
+                            <option value="{{ task.id }}">{{task.task_name }}</option>
+                        {% endfor %}  
+                </select>
+            </div>
+            <input type="submit">
+        </form>
+        
         <div class="panel span-4-5">
             <div class="table-wrapper">
-                <h2 class="major">Today</h2>
+                <h2 class="major">Task Name</h2>
                 <table class="alt">
                     <thead>
                         <tr>
@@ -38,14 +48,12 @@
                     </thead>
                     <tbody>
                         {% for subtask in subtasks %}
-                        {% if subtask.is_active %}
                         <tr>
                             <td>{{subtask.sub_name}}</td>
                             <td>{{subtask.task}}</td>
                             <td>{{subtask.start_time}}</td>
                             <td>{{subtask.end_time}}</td>
                         </tr> 
-                        {% endif %}
                         {% endfor %}  
                     </tbody>
                     <!-- <tfoot>
@@ -56,19 +64,11 @@
                     </tfoot> -->
                 </table>
             </div>
+            {{ form.errors }}
+            {{ form.non_field_errors }} 
         </div>
-        <div class="intro color4">
-            <h2><a href="{% url 'pending_tasks' %}">Pending Tasks</a></h2>
-            <h2><a href="{% url 'subtasks_by_date' %}">Subtasks by Date</a></h2>
-            <h2><a href="{% url 'subtasks_by_task' %}">Subtasks by Task</a></h2>
-        </div>
-        <!-- <div class="panel span-4-5">
-
-            <div class="table-wrapper">
-                <h2 class="major">Pending Till Now</h2>
-                
-            </div>
-        </div>  -->
+         
+         
     </section>
 
 

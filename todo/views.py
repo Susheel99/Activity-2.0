@@ -92,3 +92,16 @@ def subtasks_by_date(request):
         
         return render(request,'todo/get_subtasksbydate.html',{'subtasks':subtasks,'day':date})
     return render(request,'todo/get_subtasksbydate.html',{'subtasks':subtasks})
+
+def subtasks_by_task(request):
+    tasks = Task.objects.filter(user=request.user)
+    subtasks = None
+    if request.method == 'POST':
+        print('Yes')
+        id = request.POST.get('id')
+        print(id)
+        task = Task.objects.get(id=id)
+        subtasks = SubTask.objects.filter(user=request.user,task=task).order_by('start_time')
+     
+        return render(request,'todo/subtasks_by_task.html',{'subtasks':subtasks,'tasks':tasks})
+    return render(request,'todo/subtasks_by_task.html',{'subtasks':subtasks,'tasks':tasks})
