@@ -17,10 +17,12 @@ from django.contrib import admin
 from django.urls import path,include
 from django.conf.urls.static import static
 from django.conf import settings
+from project import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('project/', include('project.urls')),
     path('todo/', include('todo.urls')),
     path('accounts/', include('accounts.urls')),
+    path('', views.webmainpage, name='webmainpage'),
 ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

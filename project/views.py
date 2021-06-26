@@ -51,3 +51,6 @@ def project_delete(request,id):
     project.delete()
 
     return redirect('home')
+
+def webmainpage(request):
+    return render(request,'homepage.html')
