@@ -73,35 +73,39 @@ def all_tasks(request):
     today=datetime.date.today()  # Returns 2018-01-15
     # print(c)
     subtasks = SubTask.objects.filter(user=request.user,start_date=today).order_by('start_time')
+    cnt = subtasks.count()
     
     
-    return render(request,'todo/all_tasks.html',{'subtasks':subtasks})
+    return render(request,'todo/all_tasks.html',{'subtasks':subtasks,'cnt':cnt})
 
     
 def pending_tasks(request):
     today=datetime.date.today()
     subtasks = SubTask.objects.filter(user=request.user,start_date__lt=today,is_active=True).order_by('start_time')
-    return render(request,'todo/pending_tasks.html',{'subtasks':subtasks})
+    cnt = subtasks.count()
+    return render(request,'todo/pending_tasks.html',{'subtasks':subtasks,'cnt':cnt})
 
 def subtasks_by_date(request):
     
     subtasks = None
+    cnt=0
     if request.method == 'POST':
         date = request.POST.get('date')
         subtasks = SubTask.objects.filter(user=request.user,start_date=date).order_by('start_time')
-        
-        return render(request,'todo/get_subtasksbydate.html',{'subtasks':subtasks,'day':date})
-    return render(request,'todo/get_subtasksbydate.html',{'subtasks':subtasks})
+        cnt = subtasks.count()
+        return render(request,'todo/get_subtasksbydate.html',{'subtasks':subtasks,'day':date,'cnt':cnt})
+    return render(request,'todo/get_subtasksbydate.html',{'subtasks':subtasks,'cnt':cnt})
 
 def subtasks_by_task(request):
     tasks = Task.objects.filter(user=request.user)
     subtasks = None
+    cnt=0
     if request.method == 'POST':
         print('Yes')
         id = request.POST.get('id')
         print(id)
         task = Task.objects.get(id=id)
         subtasks = SubTask.objects.filter(user=request.user,task=task).order_by('-start_date','start_time')
-     
-        return render(request,'todo/subtasks_by_task.html',{'subtasks':subtasks,'tasks':tasks})
-    return render(request,'todo/subtasks_by_task.html',{'subtasks':subtasks,'tasks':tasks})
+        cnt = subtasks.count()
+        return render(request,'todo/subtasks_by_task.html',{'subtasks':subtasks,'tasks':tasks,'cnt':cnt})
+    return render(request,'todo/subtasks_by_task.html',{'subtasks':subtasks,'tasks':tasks,'cnt':cnt})
