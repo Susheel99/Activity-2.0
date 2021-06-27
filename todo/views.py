@@ -72,7 +72,7 @@ def delete_task(request,id):
 def all_tasks(request):
     today=datetime.date.today()  # Returns 2018-01-15
     # print(c)
-    subtasks = SubTask.objects.filter(user=request.user,start_date=today).order_by('start_time')
+    subtasks = SubTask.objects.filter(user=request.user,start_date=today,is_active=True).order_by('start_time')
     cnt = subtasks.count()
     
     
