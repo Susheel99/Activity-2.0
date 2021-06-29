@@ -30,3 +30,6 @@ class SubTask(models.Model):
 
     def __str__(self):
         return self.sub_name
+
+    def timediff(self):
+        return self.start_time-self.end_time

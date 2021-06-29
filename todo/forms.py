@@ -1,9 +1,11 @@
 from django import forms
 from .models import SubTask,Task
 
-
+class DateInput(forms.DateInput):
+    input_type = 'date'
 class TaskForm(forms.ModelForm):
     class Meta:
+        widgets = {'end_date': DateInput()}
         model = Task
         fields = ['task_name','task_desc','end_date']
 

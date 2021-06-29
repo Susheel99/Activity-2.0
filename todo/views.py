@@ -74,7 +74,8 @@ def all_tasks(request):
     # print(c)
     subtasks = SubTask.objects.filter(user=request.user,start_date=today,is_active=True).order_by('start_time')
     cnt = subtasks.count()
-    
+    # for subtask in subtasks:
+    #     print((subtask.start_time-subtask.end_time))
     
     return render(request,'todo/all_tasks.html',{'subtasks':subtasks,'cnt':cnt})
 
