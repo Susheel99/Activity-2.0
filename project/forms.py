@@ -1,8 +1,11 @@
 from django import forms
 from .models import Project,Idea
 
+class DateInput(forms.DateInput):
+    input_type = 'date'
 class ProjectForm(forms.ModelForm):
     class Meta:
+        widgets = {'end_date': DateInput()}
         model = Project
         fields = ['project_name','end_date','image','concept']
 
