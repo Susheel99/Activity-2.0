@@ -7,66 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel = "icon" href = "{% static 'todo/images/webicons/thunderbolt.png' %}" type = "image/x-icon">
     <title>Activity</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-    <style>
-        /* ---- reset ---- */
-body {
-  margin: 0;
-  font: normal 75% Arial, Helvetica, sans-serif;
-}
-canvas {
-  display: block;
-  vertical-align: bottom;
-}
-/* ---- tsparticles container ---- */
-#tsparticles {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-color: #030303;
-  background-image: url("");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: 50% 50%;
-}
 
-.github {
-    width: 100%;
-  /* bottom: 10px;
-  right: 10px; */
-  position: fixed;
-  border-radius: 10px;
-  background: #fff;
-  padding: 0 12px 6px 12px;
-  border: 1px solid #000;
-}
-
-.github a:hover,
-.github a:link,
-.github a:visited,
-.github a:active {
-  color: #000;
-  text-decoration: none;
-}
-
-.github img {
-  height: 30px;
-}
-
-.github #gh-project {
-  font-size: 20px;
-  padding-left: 5px;
-  font-weight: bold;
-  vertical-align: bottom;
-}
-
-.topnav-right {
-  float: right;
-}
-
-    </style>
-    <script type="text/javascript" src="Scripts/jquery-2.1.1.min.js"></script>
-    <script type="text/javascript" src="Scripts/bootstrap.min.js"></script>
+    <!-- bootstrap css -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    
+    <!-- custom css -->
+    <link rel="stylesheet" href="{% static 'project/assets/css/homepage.css' %}">
 </head>
 <body>
     <!-- tsParticles container -->
@@ -75,6 +21,7 @@ canvas {
 <script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2.5.0/custom-elements-es5-adapter.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2.5.0/webcomponents-loader.js"></script>
 <script type="module" src="https://cdn.jsdelivr.net/npm/web-particles@1.1.0/dist/web-particles.min.js"></script>
+
 <!-- https://github.com/matteobruni/tsparticles -->
 <div class="github">
   <a class="btn btn-link" href="https://github.com/matteobruni/tsparticles" title="Find more info on GitHub">
@@ -106,7 +53,10 @@ canvas {
     </div>
 </nav>
 </div>
-<h2>Hello</h2>
+
+
 <script async="" defer="" src="https://buttons.github.io/buttons.js"></script>
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>
