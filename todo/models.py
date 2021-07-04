@@ -1,6 +1,10 @@
 from django.db import models
-from django.utils import timezone
 from django.contrib.auth.models import User
+
+from datetime import datetime
+from django.db.models import Count, TimeField
+from django.db.models.functions import TruncHour
+from django.utils import timezone
 
 # Create your models here.
 class Task(models.Model):
@@ -9,10 +13,10 @@ class Task(models.Model):
     task_desc = models.TextField(max_length=500)
     start_date = models.DateField(auto_now_add=True)
     end_date = models.DateField()
-    
+
     def __str__(self):
         return self.task_name
-    
+
     def get_subtasks(self):
         subtasks = SubTask.objects.filter(task=self,is_active=True)
         return len(subtasks)
@@ -31,5 +35,9 @@ class SubTask(models.Model):
     def __str__(self):
         return self.sub_name
 
-    def timediff(self):
-        return self.start_time-self.end_time
+    # def timediff(self):
+    #     experiments_per_hour = SubTask.objects.annotate(
+    #     hour=TruncHour('start_time', output_field=TimeField()),).values('hour').annotate(experiments=Count('id'))
+    #     for exp in experiments_per_hour:
+    #         print(type(exp['hour']), exp['experiments'])
+    #     return 0

@@ -32,12 +32,12 @@ def login(request):
         user = authenticate(request,username=username, password=password)
         if user is not None:
             auth_login(request, user)
-            return render(request, 'homepage.html')
+            return render(request, 'project/homepage.html')
         else:
             return render(request, 'accounts/login.html',{'error':"Invalid credentials"})
-    
+
     return render(request, 'accounts/login.html')
-    
+
 
 def logout(request):
     auth_logout(request)
