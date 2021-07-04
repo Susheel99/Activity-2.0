@@ -85,15 +85,17 @@
                   </tr>
                 </thead>
                 <tbody>
+                  {% for subtask in subtasks %}
                   <tr >
-                    {% for subtask in subtasks %}
+
                     <td scope="row">1</td>
                     <td>{{subtask.sub_name}}</td>
                     <td>{{subtask.task}}</td>
                     <td>{{subtask.start_time}}</td>
                     <td>{{subtask.end_time}}</td>
-                    {% endfor %}
+
                   </tr>
+                  {% endfor %}
                 </tbody>
               </table>
             </div>
