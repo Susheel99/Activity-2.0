@@ -1,162 +1,190 @@
 {% load static %}
-<!DOCTYPE HTML>
-<!--
-	Phantom by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
-<html>
-	<head>
-		<title>{{task.task_name}}</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel = "icon" href = "{% static 'todo/images/webicons/thunderbolt.png' %}" type = "image/x-icon">
-		<!-- jquery -->
-		<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'>
-		</script>
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-		<!-- font awesome -->
-		<script src="https://kit.fontawesome.com/6b54c20d54.js" crossorigin="anonymous"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-		<!-- css -->
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-		<link rel="stylesheet" href="{% static 'todo/assets/css/main.css' %}" />
-		<noscript><link rel="stylesheet" href="{% static 'todo/assets/css/noscript.css' %}" /></noscript>
-		
-		<!-- <script type="text/javascript" src="Scripts/jquery-2.1.1.min.js"></script>
-		<script type="text/javascript" src="Scripts/bootstrap.min.js"></script> -->
-		<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
-	</head>
-	<body class="is-preload">
-		<header id="header">
-			<!-- <a href="{% url 'home' %}" class="title">Projects</a> -->
-			<nav>
-				<ul>
+    <!-- custom css -->
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="{% static 'todo/assets/css/main.css' %}" />
+    <!-- font Awesome -->
+    <script src="https://kit.fontawesome.com/6b54c20d54.js" crossorigin="anonymous"></script>
 
-					{% for task_each in tasks %}
-						{% if task_each == task %}
-							<li><a href="{% url 'task_detail' task.id %}" class="active">{{task_each.task_name}}</a></li>
-						{% else %}
-							<li><a href="{% url 'task_detail' task_each.id %}" >{{task_each.task_name}}</a></li>
-						{% endif %}
-					{% endfor %} 
-					
-					 <li><a href="{% url 'index' %}" >Tasks</a></li> 
-					<li><a href="{% url 'all_tasks' %}">SubTasks</a></li>
-					<li><a href="{% url 'add_task' %}">Add Task</a></li> 
+    <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Acme&display=swap" rel="stylesheet">
+    <title>Task-Detail</title>
+  </head>
+  <body class="detail">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container main">
+        <a class="navbar-brand" href="{% url 'index' %}"><i class="fas fa-book-open"></i> Tasks</a>
+        <!-- <i class="fas fa-book-reader"> -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-				</ul>
-			</nav>
-		</header>
-		<section class="panel color1">
-			<div class="inner columns aligned" > 
-				 <!-- class="content span-5" --> 
-				
-				<div class="span-4-5">
-					<h2 class="major">{{task.task_name}}</h2>
-					<h3>Today</h3>
-					<div class="table-wrapper">
-						<table class="alt">
-							<tbody>
-								{% for sub_task in sub_tasks %}
-									{% if sub_task.is_active == True %}
-										<tr>
-											<td>{{sub_task.sub_name}}</td>
-											<td>{{sub_task.start_time}} | {{sub_task.end_time}}</td>
-											<td>
-											<a href="{% url 'hide'  sub_task.id %}"><i class="fas fa-check-circle"></i></a>
-								    		</td>
-											<td><a href="{% url 'delete_subtask' sub_task.id %}"><i class="fas fa-times-circle"></i></a></td>
-										</tr>
-									{% endif %}
-								{% endfor %}
-							</tbody>
-							<tfoot>
-								<tr>
-									<td colspan="2"></td>
-									<td></td>
-								</tr>
-							</tfoot>
-						</table>
-					</div>
-					<div class="row">
-						<div class="col-md-8">
-							<ul class="actions">
-								<li><a href="{% url 'delete_task' task.id %}" onclick="return confirm('Are you sure to remove task?')" class="button primary color2"><i class="fas fa-trash-alt"></i> Delete Task</a></li>
-							</ul>
-						</div>
-						<div class="col-md-4">
-							<ul class="actions">
-								<li><span class="button primary color2 disabled">End Date|{{task.end_date}}</span></li>
-								<!-- <li><span class="button disabled">Disabled</span></li> -->
-							</ul>
-						</div>
-					</div>
-					<!-- <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div> -->
-				</div>
-				<div class="span-2" >
-						<h3>Form</h3>
-					<form method="POST" action="{% url 'add' task.id%}">
-						{% csrf_token %}
-						<div class="row">
-							<div class="col-md-10">
-								<label for="demo-email"><h4>SubTask</h4></label>
-								{{form.sub_name}}
-							</div>
-						</div>
-						<br>
-						<div class="row">
-							<div class="col-md-6">
-								<label for="demo-email"><h4>Start Time</h4></label>
-								{{form.start_time}}
-							</div>
-							<div class="col-md-6">
-								<label for="demo-email"><h4>End Time</h4></label>
-								{{form.end_time}}
-							</div>	
-						</div>
-						<br>
-						<div class="row">
-							<div class="col-md-12">
-								<label for="demo-email"><h4>Start Date</h4></label>
-								{{form.start_date}}
-							</div>
-						</div>
-						<br>
-						<div class="row">
-							<div class="col-md-4">
-								<button type="submit">Add <i class="fas fa-plus-circle"></i></button>
-							</div>
-						</div>						
-					</form>
-					</div>
-			</div>
-			
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active main-item">
+              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <!-- <li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
+            </li> -->
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Account
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="{% url 'accounts:signup' %}"><i class="fas fa-user-plus main-icon"></i>Sign up</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="{% url 'accounts:login' %}"><i class="fas fa-sign-in-alt main-icon"></i> Log In</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="{% url 'accounts:logout' %}"><i class="fas fa-sign-out-alt main-icon"></i> Log Out</a>
+              </div>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Filter
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="{% url 'subtasks_by_date' %}"></i>By date</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="{% url 'subtasks_by_task' %}"></i> By task</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="{% url 'pending_tasks' %}"></i> Pending Tasks</a>
+                </div>
+            </li>
+            <!-- <li class="nav-item">
+              <a class="nav-link disabled" href="#">Disabled</a>
+            </li> -->
+          </ul>
 
-			
-		</section>
-		<!-- Footer -->
-		<footer id="footer" class="wrapper style1-alt">
-			<div class="inner">
-				<ul class="menu">
-					<li>&copy; Susheel Arukonda. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-				</ul>
-			</div>
-		</footer>
+        </div>
+        </div>
+    </nav>
+    <!-- navbar ends -->
+    <div class="detail">
+      <div class="container-fluid detail-title">
+        <div class="container">
+          <div>
+            <h1>Django-Ecommerce</h1>
+          </div>
+        </div>
+      </div>
 
-		<!-- Scripts -->
-			<script src="{% static 'todo/assets/js/jquery.min.js' %}"></script>
-			<script src="{% static 'todo/assets/js/browser.min.js' %}"></script>
-			<script src="{% static 'todo/assets/js/breakpoints.min.js' %}"></script>
-			<script src="{% static 'todo/assets/js/util.js' %}"></script>
-			<script src="{% static 'todo/assets/js/main.js' %}"></script>
 
-		<!-- bootstrap -->
-		<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
+      <!-- table  -->
+      <div class="container ">
 
-			
+        <div class="container-fluid date-body">
+          <div class="row">
+              <div class="col-md-12">
+               <table class="table table-bordered table-dark">
+                   <!-- <thead>
+                     <tr>
 
-	</body>
+                           <th scope="col">s.no</th>
+                           <th scope="col">Task</th>
+                           <th scope="col">Start Time</th>
+                           <th scope="col">End time</th>
+                           <th scope="col"></th>
+                           <th scope="col"></th>
+                     </tr>
+                   </thead> -->
+                   <tbody>
+                    {% for sub_task in sub_tasks %}
+                    {% if sub_task.is_active == True %}
+                     <tr >
+                       <td scope="row">{{forloop.counter}}</td>
+                       <td >{{sub_task.sub_name}}</td>
+                       <td >{{sub_task.start_time}} | {{sub_task.end_time}}</td>
+                       <td ><a href="{% url 'hide'  sub_task.id %}"><i class="fas fa-check-circle"></i></a></td>
+                       <td ><a href="{% url 'delete_subtask' sub_task.id %}"><i class="fas fa-times-circle"></i></a></td>
+                     </tr>
+                      {% endif %}
+								    {% endfor %}
+
+                   </tbody>
+                   <tfoot>
+                    <tr>
+                      <td colspan="1"></td>
+                      <td></td>
+                    </tr>
+                  </tfoot>
+                 </table>
+
+                 <div class="row">
+                  <div class="col-md-8">
+                    <ul class="actions">
+                      <li><a href="{% url 'delete_task' task.id %}" onclick="return confirm('Are you sure to remove task?')" class="btn btn-primary"><i class="fas fa-trash-alt"></i> Delete Task</a></li>
+                    </ul>
+                  </div>
+                  <div class="col-md-4">
+                    <ul class="actions">
+                      <li><span class="">End Date|{{task.end_date}}</span></li>
+                      <!-- <li><span class="button disabled">Disabled</span></li> -->
+                    </ul>
+                  </div>
+                </div>
+                <!-- <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div> -->
+              </div>
+      </div>
+      <!-- table ends -->
+
+      <!-- form  -->
+      <div class="container-fluid detail-form">
+        <div class="container">
+          <form method="POST" action="{% url 'add' task.id%}">
+            {% csrf_token %}
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="inputEmail4">SubTask</label>
+                {{form.sub_name}}
+              </div>
+
+            </div>
+
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                <label for="inputCity">Start Time</label>
+                {{form.start_time}}
+              </div>
+              <div class="form-group col-md-4">
+                <label for="inputCity">End Time</label>
+                {{form.end_time}}
+              </div>
+
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                <label for="inputZip">Start Date</label>
+                {{form.start_date}}
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary mb-2">Add <i class="fas fa-plus-circle"></i></button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <!-- Table js -->
+    <script src="task-detail.js"></script>
+
+  </body>
 </html>

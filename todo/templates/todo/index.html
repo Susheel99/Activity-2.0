@@ -1,94 +1,131 @@
 {% load static %}
-<!DOCTYPE HTML>
-<!--
-	Ethereal by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
-<html>
-	<head>
-		<title>Tasks</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel = "icon" href = "{% static 'todo/images/webicons/thunderbolt.png' %}" type = "image/x-icon">
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-		<link rel="stylesheet" href="{% static 'todo/assets/css/main.css' %}" />
-		<noscript><link rel="stylesheet" href="{% static 'todo/assets/css/noscript.css' %}" /></noscript>
-	</head>
-	<body class="is-preload">
-		<!-- Header -->
-		<header id="header">
-			<!-- <a href="{% url 'home' %}" class="title">Projects</a> -->
-			<nav>
-				<ul>
-					<li><a href="{% url 'home' %}">Projects</a></li>
-					<li><a href="{% url 'index' %}" class="active">Tasks</a></li>
-					<li><a href="{% url 'all_tasks' %}">SubTasks</a></li>
-					<li><a href="{% url 'add_task' %}">Add Task</a></li>
-					
-					
-				</ul>
-			</nav>
-		</header>
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-		<!-- <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div> -->
-				<!-- Wrapper -->
-					<div id="wrapper">
+    <!-- head icon -->
+    <link rel = "icon" href = "{% static 'todo/images/webicons/thunderbolt.png' %}" type = "image/x-icon">
 
-						<!-- Panel (Banner) -->
-							<section class="panel banner right">
-								<div class="content color0 span-3-75">
-									<h1 class="major">Hello, my name<br />
-									is Ethereal</h1>
-									<p>This is <strong>Ethereal</strong>, a free site template by AJ for <a href="https://html5up.net">HTML5 UP</a>. It’s fully responsive, built on HTML5 and CSS3, and released entirely for free under the Creative Commons license. Hope you dig it :)</p>
-									<ul class="actions">
-										<!-- <li><a href="{% url 'add_task' %}" >Next</a></li> -->
-										<li><a href="{% url 'add_task' %}">Add Task</a></li>
-										<li><a href="{% url 'all_tasks' %}"><i class="fas fa-tasks fa-2x"></i></a></li>
-									</ul>
-								</div>
-								<!-- <div class="image filtered span-1-75" data-position="25% 25%">
-									<img src="images/pic01.jpg" alt="" />
-								</div> -->
-							</section>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-						<!-- Panel -->
-							<section class="panel color4-alt">
-								{% for task in tasks %}
-								
-									<div class="intro color4">
-										<h2 > <a href="{% url 'task_detail' task.id %}" style="text-decoration: none;">{{task.task_name}} <span class="badge rounded-pill bg-light text-dark">{{task.get_subtasks}}</span>
-										</a> </h2>
-										<p>{{task.task_desc}}</p>
-									</div>
-									<div class="intro color2">
-										
-										
-									</div>
-									
-								{% endfor %}
-							</section>
+    <!-- custom css -->
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="{% static 'todo/assets/css/main.css' %}" />
 
-							<!-- <section class="panel color2-alt">
-								<div class="intro color2">
-									<h2 class="major">Elements</h2>
-									<p>Sed vel nibh libero. Mauris et lorem pharetra massa lorem turpis congue pulvinar. Vivamus sed feugiat finibus. Duis amet bibendum amet sed. Duis mauris ex, dapibus sed ligula tempus volutpat magna etiam. </p>
-								</div>
-								
-							</section> -->
+    <!-- font Awesome -->
+    <script src="https://kit.fontawesome.com/6b54c20d54.js" crossorigin="anonymous"></script>
 
-						<!-- Copyright -->
-							<!-- <div class="copyright">&copy; Untitled. Design: <a href="https://html5up.net">HTML5 UP</a>.</div> -->
+    <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Acme&display=swap" rel="stylesheet">
 
-					</div>
+    <title>Tasks</title>
+  </head>
+  <body>
 
-			</div>
 
-		<!-- Scripts -->
-			<script src="{% static 'todo/assets/js/jquery.min.js' %}"></script>
-			<script src="{% static 'todo/assets/js/browser.min.js' %}"></script>
-			<script src="{% static 'todo/assets/js/breakpoints.min.js' %}"></script>
-			<script src="{% static 'todo/assets/js/main.js' %}"></script>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container main">
+                <a class="navbar-brand" href="{% url 'index' %}"><i class="fas fa-book-open"></i> Tasks</a>
+                <!-- <i class="fas fa-book-reader"> -->
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
 
-	</body>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                  <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active main-item">
+                      <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <!-- <li class="nav-item">
+                      <a class="nav-link" href="#">Link</a>
+                    </li> -->
+                    <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Account
+                      </a>
+                      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{% url 'accounts:signup' %}"><i class="fas fa-user-plus main-icon"></i>Sign up</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{% url 'accounts:login' %}"><i class="fas fa-sign-in-alt main-icon"></i> Log In</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="{% url 'accounts:logout' %}"><i class="fas fa-sign-out-alt main-icon"></i> Log Out</a>
+                      </div>
+                    </li>
+                    <!-- <li class="nav-item">
+                      <a class="nav-link disabled" href="#">Disabled</a>
+                    </li> -->
+                  </ul>
+
+                </div>
+                </div>
+            </nav>
+
+            <!-- description of the day -->
+            <div class="container-fluid day">
+                <div class="container ">
+                    <!-- <h1>Good Morning</h1>
+                    <h1 class="righty">Date</h1> -->
+
+                    <h2 class="center day-clock">Have a Good Day</h2>
+
+
+                </div>
+            </div>
+            <div class="container-fluid tasks">
+                <div class="container">
+                  {% for task in tasks %}
+                    <div class="tasks-body">
+                        <div class="card text-center">
+                            <div class="card-header">
+                              {{task.task_name}}
+                            </div>
+                            <div class="card-body">
+                              <!-- <h5 class="card-title">Django-Ecommerce</h5> -->
+                              <p class="card-text">{{task.task_desc}}</p>
+                              <a href="{% url 'task_detail' task.id %}" class="btn btn-primary">View Subtasks</a>
+                            </div>
+                            <div class="card-footer text-muted">
+                              End date | {{task.end_date}}
+                            </div>
+                          </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+            </div>
+
+
+
+        <!-- footer -->
+        <footer class="footer">
+            <div class="container">
+              <div class="row">
+                  <div class="text-muted col-md-7">
+                    Copyright @Susheel Arukonda 2021
+                  </div>
+                  <div class="social-icon-pack-white col-md-5">
+                    <span class="social-icon"><a href=""><i class="fab fa-twitter"></i></a></i></span>
+                    <span class="social-icon"><a href=""><i class="fab fa-youtube"></i></a></i></span>
+                    <span class="social-icon"><a href=""><i class="fab fa-skype"></i></a></i></span>
+                    <span class="social-icon"><a href=""><i class="fab fa-facebook"></i></a></i></span>
+                  </div>
+              </div>
+            </div>
+          </footer>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
 </html>

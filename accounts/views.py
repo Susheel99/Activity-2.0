@@ -18,7 +18,7 @@ def signup(request):
                 user = User.objects.create_user(username=request.POST['username'],email=request.POST['email'], password=request.POST['password1'])
                 user.save()
                 # auth.login(request, user)
-                return render(request,'homepage.html')
+                return render(request,'project/homepage.html')
         else:
             return render(request, 'accounts/signup.html', {'error': "Passwords didn't match"})
 
@@ -41,4 +41,4 @@ def login(request):
 
 def logout(request):
     auth_logout(request)
-    return render(request, 'homepage.html')
+    return render(request, 'project/homepage.html')
