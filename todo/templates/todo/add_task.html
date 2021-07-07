@@ -22,31 +22,35 @@
     <title>Add Task</title>
   </head>
 <body class="adtask-bg">
-                <h3>Form</h3>
-                <form action="" method="POST">
-                    {% csrf_token %}
-                    <div class="row">
-                        <div class="col-md-8">
-                            <label for="demo-email"><h4>Task Name</h4></label>
-                            {{form.task_name}}
+                <br>
+                <br>
+                <div class="container">
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-8">
+                                <label><h5>Task Name</h5></label>
+                                {{form.task_name}}
+                            </div>
+                            <div class="col-md-4">
+                                <label><h5>End Date</h5></label>
+                                {{form.end_date}}
+                            </div>
                         </div>
-                        <div class="col-md-4">
-                            <label for="demo-email"><h4>End Date</h4></label>
-                            {{form.end_date}}
+                        <br>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label><h5>Description</h5></label>
+                                {{form.task_desc}}
+                            </div>
+    
                         </div>
-                    </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <label for="demo-email"><h4>Description</h4></label>
-                            {{form.task_desc}}
-                        </div>
-
-                    </div>
-                    <input type="submit">
-                </form>
-            </div>
-        </div>
+                        <br>
+                        <input type="submit" class="btn btn-primary mb-2">
+                    </form>
+                </div>
+                
+           
 
 
 

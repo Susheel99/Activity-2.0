@@ -13,6 +13,8 @@ class TaskForm(forms.ModelForm):
         super(TaskForm, self).__init__(*args, **kwargs)
 
         self.fields['task_name'].widget.attrs['class'] = 'form-control'
+        self.fields['task_desc'].widget.attrs['class'] = 'form-control'
+        self.fields['end_date'].widget.attrs['class'] = 'form-control'
         
 
 
