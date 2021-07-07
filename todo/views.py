@@ -16,8 +16,9 @@ def task_detail(request,id):
     form = SubTaskForm(request.POST or None)
     tasks = Task.objects.filter(user=request.user)
     task = Task.objects.get(id=id)
-    sub_tasks = SubTask.objects.filter(task=task)
-    return render(request,'todo/generic.html',{'task':task,'sub_tasks':sub_tasks,'form':form,'tasks':tasks})
+    sub_tasks = SubTask.objects.filter(task=task,is_active=True)
+    cnt = sub_tasks.count()
+    return render(request,'todo/generic.html',{'task':task,'sub_tasks':sub_tasks,'form':form,'tasks':tasks,'cnt':cnt})
 
 def hide(request,id):
     subtask = SubTask.objects.get(id=id)

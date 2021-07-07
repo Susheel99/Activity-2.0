@@ -104,22 +104,23 @@
                    </thead> -->
                    <tbody>
                     {% for sub_task in sub_tasks %}
-                    {% if sub_task.is_active == True %}
+                    
                      <tr >
                        <td scope="row">{{forloop.counter}}</td>
                        <td >{{sub_task.sub_name}}</td>
-                       <td >{{sub_task.start_time}} | {{sub_task.end_time}}</td>
+                       <td >{{sub_task.start_time}} </td>
+                       <td> {{sub_task.end_time}}</td>
                        <td ><a href="{% url 'hide'  sub_task.id %}"><i class="fas fa-check-circle"></i></a></td>
                        <td ><a href="{% url 'delete_subtask' sub_task.id %}"><i class="fas fa-times-circle"></i></a></td>
                      </tr>
-                      {% endif %}
+                      
 								    {% endfor %}
 
                    </tbody>
                    <tfoot>
                     <tr>
-                      <td colspan="1"></td>
-                      <td></td>
+                      <td colspan="1">Total tasks</td>
+                      <td>{{cnt}}</td>
                     </tr>
                   </tfoot>
                  </table>

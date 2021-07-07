@@ -20,3 +20,11 @@ class SubTaskForm(forms.ModelForm):
     class Meta:
         model = SubTask
         fields = ['sub_name', 'start_date','start_time','end_time']
+
+    def __init__(self,*args, **kwargs):
+        super(SubTaskForm, self).__init__(*args, **kwargs)
+
+        self.fields['sub_name'].widget.attrs['class'] = 'form-control'
+        self.fields['start_date'].widget.attrs['class'] = 'form-control'
+        self.fields['start_time'].widget.attrs['class'] = 'form-control'
+        self.fields['end_time'].widget.attrs['class'] = 'form-control'
