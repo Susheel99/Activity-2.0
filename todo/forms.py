@@ -3,6 +3,9 @@ from .models import SubTask,Task
 
 class DateInput(forms.DateInput):
     input_type = 'date'
+
+class TimeInput(forms.TimeInput):
+    input_type = 'time'
 class TaskForm(forms.ModelForm):
     class Meta:
         widgets = {'end_date': DateInput()}
@@ -20,6 +23,7 @@ class TaskForm(forms.ModelForm):
 
 class SubTaskForm(forms.ModelForm):
     class Meta:
+        widgets = {'start_date': DateInput(),'start_time': TimeInput(),'end_time': TimeInput()}
         model = SubTask
         fields = ['sub_name', 'start_date','start_time','end_time']
 
