@@ -90,15 +90,17 @@
           </tr>
         </thead>
         <tbody>
-          <tr >
+          
             {% for subtask in subtasks %}
+            <tr >
             <td scope="row">{{forloop.counter}}</td>
             <td>{{subtask.sub_name}}</td>
             <td>{{subtask.task}}</td>
             <td>{{subtask.start_time}}</td>
             <td>{{subtask.end_time}}</td>
+            </tr>
             {% endfor %}
-          </tr>
+          
         </tbody>
         <tfoot>
           <tr>
