@@ -121,10 +121,16 @@
 								    {% endfor %}
 
                    </tbody>
-                   <tfoot>
+                   <tfoot class="tbl-foot">
                     <tr>
                       <td colspan="1">Total tasks</td>
                       <td>{{cnt}}</td>
+                      
+                    </tr>
+                    <tr>
+                      <td colspan="1">Task EndDate</td>
+                      <td>{{task.end_date}}</td>
+                      
                     </tr>
                   </tfoot>
                  </table>
@@ -132,14 +138,12 @@
                  <div class="row">
                   <div class="col-md-8">
                     <ul class="actions">
-                      <li><a href="{% url 'delete_task' task.id %}" onclick="return confirm('Are you sure to remove task?')" class="btn btn-primary"><i class="fas fa-trash-alt"></i> Delete Task</a></li>
+                      <li class="actions"><a href="{% url 'delete_task' task.id %}" onclick="return confirm('Are you sure to remove task?')" class="btn btn-primary"><i class="fas fa-trash-alt"></i> Delete Task</a></li>
+                      
                     </ul>
                   </div>
                   <div class="col-md-4">
-                    <ul class="actions">
-                      <li><span class="">End Date|{{task.end_date}}</span></li>
-                      <!-- <li><span class="button disabled">Disabled</span></li> -->
-                    </ul>
+                    <li class="actions"><a href="{% url 'completed_task' task.id %}"  class="btn btn-primary"><i class="fas fa-clipboard-check"></i> Completed</a></li>
                   </div>
                 </div>
                 <!-- <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div> -->

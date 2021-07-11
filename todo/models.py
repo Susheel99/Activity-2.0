@@ -11,6 +11,7 @@ class Task(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE,null=True)
     task_name = models.CharField(max_length=100)
     task_desc = models.TextField(max_length=500)
+    is_active = models.BooleanField(default=True)
     start_date = models.DateField(auto_now_add=True)
     end_date = models.DateField()
 
@@ -20,6 +21,8 @@ class Task(models.Model):
     def get_subtasks(self):
         subtasks = SubTask.objects.filter(task=self,is_active=True)
         return len(subtasks)
+    
+    
 
 
 

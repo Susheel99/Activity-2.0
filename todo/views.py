@@ -77,6 +77,12 @@ def delete_task(request,id):
 
     return redirect('index')
 
+def completed_task(request,id):
+    task = Task.objects.get(id=id)
+    task.is_active = False
+    task.save()
+    return redirect('index')
+
 def all_tasks(request):
     today=datetime.date.today()  # Returns 2018-01-15
     subtasks = SubTask.objects.filter(user=request.user,start_date=today,is_active=True).order_by('start_time')

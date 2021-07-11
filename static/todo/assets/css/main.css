@@ -1,5 +1,5 @@
 body{
-    /* background-color: rgb(232, 248, 248); */
+    /* box-sizing: border-box; */
     margin: 0;
 }
 
@@ -203,6 +203,14 @@ body{
     margin-top:100px;
     margin-left: 200px;
 
+}
+
+.actions{
+    display:inline;
+}
+
+.tbl-foot{
+    background-color: #343f5f;
 }
 
 /* -------------------------ALL TASKS.HTML--------------------------------- */

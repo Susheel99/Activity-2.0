@@ -205,6 +205,14 @@ body{
 
 }
 
+.actions{
+    display:inline;
+}
+
+.tbl-foot{
+    background-color: #343f5f;
+}
+
 /* -------------------------ALL TASKS.HTML--------------------------------- */
 .all-table{
     margin-top: 50px;
