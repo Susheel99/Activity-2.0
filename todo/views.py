@@ -6,6 +6,13 @@ from .forms import SubTaskForm,TaskForm
 import datetime
 from itertools import chain
 
+#email
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
+from django.core.mail import EmailMultiAlternatives
+from activity import settings
+from django.core.mail import send_mail
+
 # Create your views here.
 
 def index(request):
@@ -72,11 +79,9 @@ def delete_task(request,id):
 
 def all_tasks(request):
     today=datetime.date.today()  # Returns 2018-01-15
-    # print(c)
     subtasks = SubTask.objects.filter(user=request.user,start_date=today,is_active=True).order_by('start_time')
     cnt = subtasks.count()
-    # for subtask in subtasks:
-    #     print((subtask.end_time-subtask.start_time))
+    
     
     return render(request,'todo/all_tasks.html',{'subtasks':subtasks,'cnt':cnt})
 
@@ -111,3 +116,4 @@ def subtasks_by_task(request):
         cnt = subtasks.count()
         return render(request,'todo/subtasks_by_task.html',{'subtasks':subtasks,'tasks':tasks,'cnt':cnt})
     return render(request,'todo/subtasks_by_task.html',{'subtasks':subtasks,'tasks':tasks,'cnt':cnt})
+
