@@ -25,4 +25,6 @@ urlpatterns = [
     path('todo/', include('todo.urls')),
     path('accounts/', include('accounts.urls')),
     path('', views.webmainpage, name='webmainpage'),
+    path('movies/', include('movies.urls')),
+    
 ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
