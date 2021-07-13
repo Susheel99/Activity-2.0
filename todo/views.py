@@ -5,6 +5,7 @@ from django.http import HttpResponseRedirect
 from .forms import SubTaskForm,TaskForm
 import datetime
 from itertools import chain
+import pandas as pd
 
 #email
 from django.template.loader import render_to_string
@@ -14,10 +15,34 @@ from activity import settings
 from django.core.mail import send_mail
 
 # Create your views here.
+def createfile(request):
+    sub_tasks = SubTask.objects.filter(user=request.user)
+
+    name = []
+    stime=[]
+    etime=[]
+    tsk=[]
+    sdate=[]
+    for subtask in sub_tasks:
+        name.append(subtask.sub_name)
+        stime.append(subtask.start_time)
+        etime.append(subtask.end_time)
+        sdate.append(subtask.start_date)
+        tsk.append(subtask.task)
+    dictsub= {'subtasks':name,'task':tsk,'start_time':stime,
+                    'end_time':etime,'start_date':sdate
+                    }
+
+    df = pd.DataFrame(dictsub)
+    df.to_csv('web1.csv')
+    print(df.head())
+
 
 def index(request):
     tasks = Task.objects.filter(user=request.user).order_by('-end_date')
+    createfile(request)
     return render(request,'todo/index.html',{'tasks':tasks})
+    
 
 def task_detail(request,id):
     form = SubTaskForm(request.POST or None)
