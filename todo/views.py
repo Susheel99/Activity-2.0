@@ -4,15 +4,9 @@ from django.urls import reverse
 from django.http import HttpResponseRedirect
 from .forms import SubTaskForm,TaskForm
 import datetime
-from itertools import chain
 import pandas as pd
 
-#email
-from django.template.loader import render_to_string
-from django.utils.html import strip_tags
-from django.core.mail import EmailMultiAlternatives
-from activity import settings
-from django.core.mail import send_mail
+
 
 # Create your views here.
 def createfile(request):
