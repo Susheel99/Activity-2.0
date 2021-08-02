@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'todo',
     'project',
     'accounts',
-    'movies',
+    
 ]
 
 MIDDLEWARE = [
